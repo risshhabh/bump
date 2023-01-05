@@ -12,7 +12,7 @@ An easier C++ compile command.
 ```
 Which is mostly similar to [Rust's](https://www.rust-lang.org/) file structure.
 
-##### *I do not recommend you to use bump; Makefile and other methods are better. I use it because it is easiest for me.*
+##### *I do not recommend you to use bump, especially if you are on Windows; Makefile and other methods are better. I use bump because it is easiest for me.*
 
 ## How to use (zsh on Mac)
 1. Ensure you have [Python3](https://www.python.org/downloads/) installed by running
