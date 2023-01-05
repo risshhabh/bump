@@ -136,7 +136,6 @@ def check_cpp(cpp_file: str) -> int:
     if Path(cpp_file).is_file() and (  # Check if file
         os.path.splitext(cpp_file)[-1].lower()
         in (".cpp", ".cc", ".cxx")  # Check if file is C++
-        or os.path.splitext(cpp_file)[-1] == ".C"
     ):
         cpp_files.append(cpp_file)
         return 1
