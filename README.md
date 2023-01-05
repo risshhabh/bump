@@ -32,7 +32,7 @@ $ bump -c $FILE   OR bump --compile $FILE    # Compile `file` if it is in ./src/
 $ bump -a         OR bump --all              # Compile every file in ./src/ to ./target/
 $ bump -xa        OR bump --clearall         # Delete every executable in ./target/
 $ bump -x $FILE   OR bump --clear $FILE      # Delete `file` if it is an executable in ./target/
-$ bump OR bump -h OR bump --help             # Help page
+$ bump -h OR bump OR bump --help             # Help page
 ```
 
 ## Compile
