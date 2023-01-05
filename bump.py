@@ -166,8 +166,13 @@ def del_file(exec_file):
             "File is either not an executable or has a file extension and will not be deleted"
         )
         return 0
-    elif os.access(exec_file, os.X_OK):  # File executable permissions check
+    elif not os.access(exec_file, os.X_OK):  # File executable permissions check
         print("File is not an executable and will not be deleted")
+        return 0
+    else:  # File is executable in `target/` and can be deleted
+        os.system(f"rm -rf {exec_file}")
+        # * https://github.com/nivekuil/rip
+        # os.system(f"rip {exec_file}")
         return 0
 
 
@@ -207,11 +212,16 @@ if len(cpp_files) == 0:
     print("Invalid command")
     sys_exit()
 
+
+from pathlib import Path
+
+
+# FIXME unsafe target path finder
 # Go ahead and compile all files
 for src_path in cpp_files:
 
     # Get executable file path for each `src_path`
-    target_path = os.path.splitext(src_path.replace(src_path[0:5], "./target", 1))[0]
+    target_path = os.path.splitext(src_path.replace("src/", "target/"))[0]
 
     # First, ensure the enclosing folder of the executable path exists.
     try:
