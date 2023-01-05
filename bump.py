@@ -12,7 +12,7 @@ from sys import exit as sys_exit
 cmd = "g++-12 -std=c++17 -pedantic-errors -Wall -Wextra -Weffc++ -Wsign-conversion -Werror -fmax-errors=1 -o "  # `-o ' at end is required
 
 
-def print_help_page() -> str:
+def print_help_page() -> int:
     """
     PainfulPrint out help page
     """
@@ -50,7 +50,7 @@ def print_help_page() -> str:
 
     print(final_output)
 
-    return "ed with pain"
+    return 0
 
 
 argslen = len(argv) - 1
@@ -78,7 +78,10 @@ def cpp_list() -> int:
     # First, get relative path of every C++ file
     for root, dirs, files in os.walk("./src"):
         for file in files:
-            if file.endswith((".cpp", ".cc", ".cxx")):
+            if (
+                os.path.splitext(file)[-1].lower() in (".cpp", ".cc", ".cxx")
+                or os.path.splitext(file)[-1] == ".C"
+            ):
                 cpp_files.append(os.path.join(root, file))
 
     return 1
@@ -104,8 +107,27 @@ def clear_target() -> int:
         return 0
 
 
-def check_cpp() -> None:
-    pass
+def check_cpp(file: str) -> int:
+    """
+    Check if inputted file exists and is a C++ file.
+    """
+    global cpp_files
+
+    from pathlib import Path
+
+    if Path(file).is_file() and (  # Check if file
+        os.path.splitext(file)[-1].lower()
+        in (".cpp", ".cc", ".cxx")  # Check if file is C++
+        or os.path.splitext(file)[-1] == ".C"
+    ):
+        cpp_files.append(file)
+        return 1
+    else:
+        print(
+            """File either does not exist or is not a C++ file.
+        Check it's path and extension."""
+        )
+        return 0
 
 
 if argslen == 1:
