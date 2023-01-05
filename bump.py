@@ -223,3 +223,9 @@ for src_path in cpp_files:
     os.system(f"{cmd} {target_path} {src_path}")
 
 print(f"Compiled {len(cpp_files)} files")
+
+
+"""
+TODO
+- `bump init project/path/` to initialize a project
+"""
